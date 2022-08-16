@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MagicLayout.cshtml";
+}
+<div class="bigcontainer">
+<div class="container px-5">
+        <div class="heading p-3">
+            <div class="contetn pb-4 border-bottom d-flex align-items-center">
+                <img class="profilemini" src="/Images/story1.jpg" alt="">
+                <div class="activestatus">
+                    <p class="name">Muhammed Ali</p>
+                    <p class="text-primary active">Active Now</p>
+                </div>
+            </div>
+        </div>
+        <div id="messagescontainer" class="messagescontainer p-3">
+        </div>
+    </div>
+<div class="form-floating">
+        <textarea id="textarea" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea">Enter your message</label>
+      </div>
+      
+      <button onclick="sendMessages()" type="button" style="width: 100%;" class="btn btn-primary">Send</button>
+      </div>
+      
+      @section Scripts {
+          <script src="~/lib/microsoft-signalr/signalr.js"></script>
+<script>
+        var chat = document.getElementById("messagescontainer")
+        var hubConnection = new signalR.HubConnectionBuilder().withUrl("/OnlineChat").build();
+        hubConnection.on("RecieveMessage", function(senderName, Message) {
+            chat.innerHTML += `
+            <div class="d-flex justify-content-end">
+                <p class="recievemessaga">${Message} </p>
+            </div>`;
+             
+        });
+        hubConnection.start().then(function() {
+        }).catch(function(){
+            console.log("error")
+        });
+        function sendMessages(){
+            var message = document.getElementById("textarea");
+            chat.innerHTML += `<p class="message">${message.value}</p>`;
+            hubConnection.invoke("SendMessagesToOnlineClients", message.value);
+            message.value = "";
+        }
+      </script>
+      }
+
+<style>
+*{
+    box-sizing: border-box;
+}
+
+textarea#floatingTextarea {
+    height: 100px;
+}
+.bigcontainer {
+    padding: 0 150px;
+}
+
+.container {
+    background-color: #dddddd47;
+    padding-top: 20px;
+}
+
+.profilemini {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.name, .active {
+    margin: 0;
+    font-weight: bold;
+    position: relative;
+}
+
+    .name::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #18cb18;
+        top: 0;
+        left: -34px;
+        z-index: 55;
+    }
+.activestatus {
+    margin-left: 20px;
+}
+
+.messagescontainer {
+    height: 50vh;
+    overflow: auto;
+}
+.message,.recievemessaga {
+    padding: 10px;
+    background-color: #3636f5;
+    color: white;
+    border-radius: 0 5px 5px;
+    width: 50%;
+}
+.recievemessaga {
+    color: black;
+    background-color: #e3e3e3;
+}
+    </style>

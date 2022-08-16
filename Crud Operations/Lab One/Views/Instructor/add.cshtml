@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "add";
+}
+<form enctype="multipart/form-data" method = "post" action="/instructor/SaveInstructor">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Instructor Name</label>
+    <input value="" type="text" name="Name" class="form-control" id="Name" aria-describedby="namehelp">
+    @*<div id="namehelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Salary" class="form-label">Instructor Salary</label>
+    <input value="" type="number" name="Salary" class="form-control" id="Salary" aria-describedby="salaryHelp">
+    @*<div id="salaryHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Address" class="form-label">Instructor Address</label>
+    <input value="" type="text" name="Address" class="form-control" id="Address" aria-describedby="addressHelp">
+    @*<div id="addressHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Crs_id" class="form-label">Course Name</label>
+    <select name="Crs_id" id="crs" class="form-select" aria-label="Default select example">
+        @foreach (Course course in ViewBag.courses)
+        {
+            <option value="@course.Id">@course.Name</option>            
+        }
+    </select>
+    @*<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="deptID" class="form-label">Department Name</label>
+    <select onchange="getCourses()" id="department" name="Dept_id" class="form-select" aria-label="Default select example">
+        @foreach (Department department in ViewBag.departments)
+        {
+            <option value="@department.Id">@department.Name</option>
+        }
+    </select>
+    @*<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+  <label for="file" class="form-label">Upload Profile Photo</label>
+  <input name="Image" class="form-control" type="file" id="file">
+</div>
+  <button type="submit" class="btn btn-primary">Add New Instructor</button>
+</form>
+
+@section Scripts
+{
+<script>
+    function getCourses(){
+        var depid = parseInt(document.getElementById("department").value);
+        $.ajax({url: `http://localhost:5030/course/getCoursesNamesInParticularDepartment/${depid}`, success: function(result){
+        if(result!==null)
+        {
+            var crsdropdownlist = document.getElementById("crs");
+            crsdropdownlist.innerHTML = ""
+            for(var i=0;i<result.length;i++){
+                var option = document.createElement("option");
+                option.text = result[i].name;
+                option.value = result[i].id;
+                crsdropdownlist.add(option);
+            }
+        }
+    }});
+        }
+        getCourses();
+</script>
+}
+
+

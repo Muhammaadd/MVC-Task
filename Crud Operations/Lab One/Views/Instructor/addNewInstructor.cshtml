@@ -1,0 +1,48 @@
+﻿@using Lab_One.ViewModels
+@{
+    ViewData["Title"] = "addNewInstructor";
+}
+<form enctype="multipart/form-data" method = "post" action="/instructor/SaveInstructor">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Instructor Name</label>
+    <input value="" type="text" name="Name" class="form-control" id="Name" aria-describedby="namehelp">
+    @*<div id="namehelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Salary" class="form-label">Instructor Salary</label>
+    <input value="" type="number" name="Salary" class="form-control" id="Salary" aria-describedby="salaryHelp">
+    @*<div id="salaryHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Address" class="form-label">Instructor Address</label>
+    <input value="" type="text" name="Address" class="form-control" id="Address" aria-describedby="addressHelp">
+    @*<div id="addressHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Crs_id" class="form-label">Course Name</label>
+    <select name="Crs_id" class="form-select" aria-label="Default select example">
+        @foreach (Course course in ViewBag.courses)
+        {
+            <option value="@course.Id">@course.Name</option>            
+        }
+    </select>
+    @*<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="deptID" class="form-label">Department Name</label>
+    <select name="Dept_id" class="form-select" aria-label="Default select example">
+        @foreach (Department department in ViewBag.departments)
+        {
+            <option value="@department.Id">@department.Name</option>
+        }
+    </select>
+    @*<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+  <label for="file" class="form-label">Upload Profile Photo</label>
+  <input name="file" class="form-control" type="file" id="file">
+</div>
+  <button asp-page-handler="Upload" type="submit" class="btn btn-primary">Add New Instructor</button>
+</form>
+
+

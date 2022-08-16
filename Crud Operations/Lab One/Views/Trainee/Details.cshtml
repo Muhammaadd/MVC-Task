@@ -1,0 +1,43 @@
+﻿@using Lab_One.ViewModels;
+@*@model List<CrsResult>*@
+@model TraineeCourseDataViewModel;
+@{
+    ViewData["Title"] = "Detials";
+}
+<div style="text-align:center;"><img style="width:200px" src="~/images/@Model.traineeProfile" /></div>
+<h1 style="text-align:center;">Trainee name : @Model.traineeName</h1>
+<h3 style="text-align:center;">Trainee level : @Model.traineeLevel</h3>
+<p style="text-align:center;">Trainee address : @Model.traineeAddress</p>
+
+<table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course name</th>
+      <th scope="col">Course Degree</th>
+      <th scope="col">Pass Degree</th>
+      <th scope="col">Trainee Degree</th>
+    </tr>
+  </thead>
+  <tbody>
+      
+      @for(int i=0 ; i<Model.coursesIDs.Count ; i++)
+      {
+          if(Model.traineeDegrees[i]>@Model.coursesPassDegrees[i])
+            {
+                Model.colorStatus = "green"; 
+            }
+            else
+            {
+                Model.colorStatus = "Red";
+            }
+            <tr style="color:@Model.colorStatus">
+            <th scope="row">@(i+1)</th>
+            <td>@Model.coursesNames[i]</td>
+            <td>@Model.coursesDegrees[i]</td>
+            <td>@Model.coursesPassDegrees[i]</td>
+            <td>@Model.traineeDegrees[i]</td>
+        </tr>
+      }
+  </tbody>
+</table>

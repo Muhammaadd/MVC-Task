@@ -1,0 +1,95 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<header class="d-flex flex-wrap px-5 justify-content-center justify-content-md-between align-items-center">
+        <a class="d-flex justify-content-center d-md-inline col-12 col-sm-12 col-md-2 fs-3 fw-bold" href="#">MeGz</a>
+        <nav class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <ul class="mt-3 mt-md-0 d-flex justify-content-between">
+                <a asp-action = "index" asp-controller = "Instructor"><li class="p-md-4">Instructor</li></a>
+                <a asp-action = "index" asp-controller = "Trainee"><li class="p-md-4">Trainee</li></a>
+                <a asp-action = "index" asp-controller = "Course"><li class="p-md-4">Course</li></a>
+                <a id="otherlinks" asp-action="Index" asp-controller = "Chat"><li class="p-md-4">Online Chat</li></a>
+            </ul>
+        </nav>
+        <div class="megalinks flex-column flex-md-row col-12 ">
+            <div class="linksimg d-none d-lg-block col-lg-5">
+                <img src="/Magicimages/megamenu.png" alt="">
+            </div>
+            <div class="linksection col-12 col-md-6 col-lg-3">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-comments fa-fw me-1"></i>
+                            <span>Testimonials</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-user fa-fw me-1"></i>
+                            <span>Team Members</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-building fa-fw me-1">…</i>
+                            <span>Services</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-check-circle fa-fw me-1">…</i>
+                            <span>Our Skills</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-clipboard fa-fw me-1">…</i>
+                            <span>How It Works</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="linksection col-12 col-md-6 col-lg-3">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-calendar-alt fa-fw me-1">…</i>
+                            <span>Event</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-server fa-fw me-1">…</i>
+                            <span>Pricing Plans</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-play-circle fa-fw me-1">…</i>
+                            <span>Top Videos</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-chart-bar fa-fw me-1">…</i>
+                            <span>Stats</span>
+                        </a>
+                        
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-percent fa-fw me-1">…</i>
+                            <span>Request A Discount</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>

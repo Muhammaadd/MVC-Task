@@ -1,0 +1,15 @@
+@media (max-width:452px)
+{
+    ul a {
+        font-size: .8em;
+    }
+}
+@media (max-width:545px)
+{
+    .contentofmainsection h1{
+        font-size: 1.5em;
+    }
+    .contentofmainsection p {
+        font-size: .8rem;
+    }
+}

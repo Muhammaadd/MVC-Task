@@ -1,0 +1,29 @@
+﻿<table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Age</th>
+      <th scope="col">Profile</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+  <tbody>
+      @{
+          int x = 1;
+      }
+      @foreach (Student student in Model)
+      {
+        <tr>
+            <th scope="row">@x</th>
+            <td>@student.name</td>
+            <td>@student.address</td>
+            <td>@student.age</td>
+            <td><img style="width:100px;" src="/images/@student.profilePic"/></td>
+            <td><a href="/Student/studentDetails/@student.id">Details</a></td>
+        </tr>
+        x++;
+      }
+  </tbody>
+</table>

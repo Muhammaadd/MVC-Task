@@ -1,0 +1,78 @@
+﻿@using Lab_One.ViewModels
+@model Instructor 
+@{
+    ViewData["Title"] = "EditInstructor";
+}
+<form method = "post" action="/instructor/SaveInstructor/@Model.Id">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Instructor Name</label>
+    <input value="@Model.Name" type="text" name="Name" class="form-control" id="Name" aria-describedby="namehelp">
+    @*<div id="namehelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Salary" class="form-label">Instructor Salary</label>
+    <input value="@Model.Salary" type="number" name="Salary" class="form-control" id="Salary" aria-describedby="salaryHelp">
+    @*<div id="salaryHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Address" class="form-label">Instructor Address</label>
+    <input value="@Model.Address" type="text" name="Address" class="form-control" id="Address" aria-describedby="addressHelp">
+    @*<div id="addressHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="Crs_id" class="form-label">Course Name</label>
+    <select name="Crs_id" class="form-select" id="crs" aria-label="Default select example">
+        @foreach (Course course in ViewBag.courses)
+        {
+                if(Model.Crs_id==course.Id)
+                {
+                    <option selected value="@course.Id">@course.Name</option>
+                }
+                else
+                {
+                    <option value="@course.Id">@course.Name</option>            
+                }
+        }
+    </select>
+    @*<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <div class="mb-3">
+    <label for="deptID" class="form-label">Department Name</label>
+    <select onclick="getCourses()" name="Dept_id" id="department" class="form-select" aria-label="Default select example">
+        @foreach (Department department in ViewBag.departments)
+        {
+                if(Model.Dept_id==department.Id)
+                {
+                    <option selected value="@department.Id">@department.Name</option>
+                }
+                else
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+        }
+    </select>
+    @*<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>*@
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+@section Scripts
+{
+<script>
+    function getCourses(){
+        var depid = parseInt(document.getElementById("department").value);
+        $.ajax({url: `http://localhost:5030/course/getCoursesNamesInParticularDepartment/${depid}`, success: function(result){
+        if(result!==null)
+        {
+            var crsdropdownlist = document.getElementById("crs");
+            crsdropdownlist.innerHTML = ""
+            for(var i=0;i<result.length;i++){
+                var option = document.createElement("option");
+                option.text = result[i].name;
+                option.value = result[i].id;
+                crsdropdownlist.add(option);
+            }
+        }
+    }});
+        }
+</script>
+}

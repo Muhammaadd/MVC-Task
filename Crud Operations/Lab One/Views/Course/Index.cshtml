@@ -1,0 +1,46 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MagicLayout.cshtml";
+    int x = 0;
+}
+<table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Course Degree</th>
+      <th scope="col">Minimum Degree</th>
+      <th scope="col">Department</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+      
+      @foreach (Course course in Model)
+      {
+        <tr>
+            <th scope="row">@(x+1)</th>
+            <td>@course.Name</td>
+            <td>@course.Degree</td>
+            <td>@course.PassDegree</td>
+            <td>@ViewBag.DepartmentsNames[x]</td>
+            <td><a asp-action = "CourseForm" asp-controller = "Course" asp-route-id = "@course.Id" >Edit</a></td>
+            <td><a asp-action = "Delete" asp-controller = "Course" asp-route-id = "@course.Id" onclick="confirmMessage()" >Delete</a></td>
+        </tr>
+        x++;
+      }
+  </tbody>
+</table>
+<a asp-action = "CourseForm" asp-controller = "Course">New Course</a>
+@section Scripts {
+<script>
+    function confirmMessage(){
+        var confirm = window.confirm("Are you sure ?");
+        if(!confirm){
+            event.preventDefault();
+        }
+    }
+</script>
+}
